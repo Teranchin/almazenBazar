@@ -1,6 +1,7 @@
 package ItDev.AlmacenBazar.controller;
 
 import ItDev.AlmacenBazar.model.Producto;
+import ItDev.AlmacenBazar.dto.ProductoDTO;
 import ItDev.AlmacenBazar.service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,13 @@ public class ProductoController {
     //Obtenemos la lista completa de todos los productos
 
     @GetMapping("productos")
-    public List<Producto> listarProductos() {
+    public List<Producto> listarProduc() {
         return proServ.listarProductos();
+    }
+
+    @GetMapping("productos2")
+    public List<ProductoDTO> listarProduc2() {
+        return proServ.listarProductos2();
     }
 
     // Traemos un producto en particular
@@ -51,6 +57,11 @@ public class ProductoController {
         proServ.editarProducto(producto);
         return proServ.buscarProducto(producto.getIdProducto());
 
+    }
+
+    @GetMapping("productos/stockBajo")
+    public List<Producto> stockBajo() {
+        return proServ.stockBajo();
     }
 
 

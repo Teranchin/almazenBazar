@@ -1,6 +1,7 @@
 package ItDev.AlmacenBazar.service;
 
 import ItDev.AlmacenBazar.model.Producto;
+import ItDev.AlmacenBazar.dto.ProductoDTO;
 
 import java.util.List;
 
@@ -12,5 +13,7 @@ public interface IProductoService {
     public Producto buscarProducto(Long idProducto);
 
     public List<Producto> listarProductos();
+    public List<ProductoDTO> listarProductos2();
+    public List<Producto> stockBajo();
 
 }

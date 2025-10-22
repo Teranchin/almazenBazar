@@ -15,7 +15,7 @@ public class ClienteController {
     @Autowired
     private IClienteService clienteServ;
 
-    @GetMapping("clientes/crear")
+    @PostMapping ("clientes/crear")
     public String crearCliente(@RequestBody Cliente cliente) {
         clienteServ.crearCliente(cliente);
         return "Cliente creado"+ cliente.getNombre();
@@ -32,7 +32,7 @@ public class ClienteController {
         return ResponseEntity.ok(cliente);
     }
 
-    @DeleteMapping("clientes/eliminar/{idCliente")
+    @DeleteMapping("clientes/eliminar/{idCliente}")
     public String eliminarCliente(@PathVariable Long idCliente){
         clienteServ.eliminarCliente(idCliente);
         return "Cliente eliminado";
@@ -41,6 +41,6 @@ public class ClienteController {
     @PutMapping("clientes/editar")
     public Cliente editarCliente(@RequestBody Cliente cliente){
         clienteServ.editarCliente(cliente);
-        return clienteServ.buscarCliente(cliente.getIdCliente());
+        return clienteServ.buscarCliente(cliente.getId_cliente());
     }
 }

@@ -2,14 +2,13 @@ package ItDev.AlmacenBazar.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class Venta {
+public class Venta{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,21 +16,26 @@ public class Venta {
     private LocalDate fecha_venta;
     private Double total;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "ventaProducto",
+            joinColumns = @JoinColumn(name = "venta_id_venta"),
+            inverseJoinColumns = @JoinColumn(name = "lista_productos_id_producto")
+    )
     private List<Producto> listaProductos;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idCliente", nullable = false)
+    @ManyToOne
+    @JoinColumn//(name = "id_cliente", nullable = false)
     private Cliente unCliente;
 
     public Venta() {
     }
 
-    public Venta(Cliente unCliente, List<Producto> listaProductos, Double total, LocalDate fecha_venta, Long idVenta) {
-        this.unCliente = unCliente;
-        this.listaProductos = listaProductos;
-        this.total = total;
-        this.fecha_venta = fecha_venta;
+    public Venta(Long idVenta, LocalDate fecha_venta, Double total, List<Producto> listaProductos, Cliente unCliente) {
         this.idVenta = idVenta;
+        this.fecha_venta = fecha_venta;
+        this.total = total;
+        this.listaProductos = listaProductos;
+        this.unCliente = unCliente;
     }
 }
